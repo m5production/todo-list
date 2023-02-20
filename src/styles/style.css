@@ -68,13 +68,15 @@ body {
 }
 
 .task-btn {
-  width: 2rem;
+  box-sizing: border-box;
+  width: 1.5rem;
   border: 0.7rem solid transparent;
   border-top: none;
   border-bottom: none;
-  background-image: url("../assets/imgs/trash-min.svg");
+  background-color: transparent;
   background-size: contain;
   background-position: center;
+  background-origin: border-box;
   background-repeat: no-repeat;
   transition: background-image 0.2s;
 }
@@ -120,7 +122,9 @@ body {
 }
 
 .body-deactivate-cover {
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -130,15 +134,10 @@ body {
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
 }
-.body-deactivate-cover.active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .add-task-pop-up {
   position: relative;
-  top: -100%;
+  top: 0;
   width: min(80vw, 40em);
   height: min(80vh, 20em);
   display: flex;
@@ -148,16 +147,17 @@ body {
   padding: 1rem;
   background-color: bisque;
   border-radius: 1rem;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.4s;
 }
-.add-task-pop-up .task-description {
+.add-task-pop-up .new-task-description {
   flex-grow: 1;
 }
-.add-task-pop-up.active {
-  top: 0;
-  opacity: 1;
+.add-task-pop-up.showing {
+  top: -100%;
+  opacity: 0;
 }
+
 .footer {
   padding-top: 1rem;
 }
