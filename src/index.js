@@ -1,1 +1,1 @@
-import './scripts/script.js'
+import { popUpLogic } from "./pop-up-create.js";

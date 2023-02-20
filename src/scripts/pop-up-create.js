@@ -1,17 +1,21 @@
 export function popUpLogic() {
   const makeNewTaskBtn = document.getElementById('add-task-btn');
-  
-  makeNewTaskBtn.addEventListener('click', showPopUp);
+  const popUpElement = makeNewTaskPopUp();
 
-  function showPopUp() {
-    const popUp = makeNewTaskPopUp();
-    document.body.append(popUp);
+  makeNewTaskBtn.addEventListener('click', () => showPopUp(popUpElement));
+
+  function showPopUp(elem) {
+    document.body.append(elem);
+  }
+
+  function removePopUp(elem) {
+    elem.remove();
   }
 
   function makeNewTaskPopUp() {
     const popUpBodyCover = makeElementHTML({
-      elemOfKind: 'body-deactivate-cover',
-      classes: ['add-task-pop-up']
+      elemOfKind: 'div',
+      classes: ['body-deactivate-cover']
     });
     const popUp = makeElementHTML({
       elemOfKind: 'div',
@@ -35,8 +39,12 @@ export function popUpLogic() {
       textContent: 'Add new task'
     });
 
+    console.log(popUp)
+
     popUp.append(taskName, taskDescription, btn);
     popUpBodyCover.append(popUp);
+
+    return popUpBodyCover;
   }
 
   function makeElementHTML({
@@ -65,5 +73,11 @@ export function popUpLogic() {
     if (textContent) {
       elem.textContent = textContent;
     }
+
+    return elem;
+  }
+
+  function addEventListenersTo(elem, event, callback){
+    elem.addEventListener(event, () => callback)
   }
 }
