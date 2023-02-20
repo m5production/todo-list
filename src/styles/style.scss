@@ -62,7 +62,7 @@ body {
 }
 
 .task-done {
-  color:rgb(138, 138, 138);
+  color: rgb(138, 138, 138);
 
   .task-item-content-name {
     text-decoration: line-through;
@@ -79,16 +79,18 @@ body {
 }
 
 .task-btn {
-  width: 2rem;
+  box-sizing: border-box;
+  width: 1.5rem;
   border: 0.7rem solid transparent;
   border-top: none;
   border-bottom: none;
-  background-image: url("../assets/imgs/trash-min.svg");
+  background-color: transparent;
   background-size: contain;
   background-position: center;
+  background-origin: border-box;
   background-repeat: no-repeat;
   transition: background-image $animation-time;
-  
+
   &.edit-task {
     background-image: url('../assets/imgs/pencil-min.svg');
 
@@ -99,7 +101,7 @@ body {
 
   &.remove {
     background-image: url("../assets/imgs/trash-min.svg");
-  
+
     &:hover {
       background-image: url("../assets/imgs/trash-min-hover.svg");
     }
@@ -125,8 +127,8 @@ body {
     transition: transform $animation-time, fill $animation-time;
   }
 
-  &:hover, 
-  &:focus    {
+  &:hover,
+  &:focus {
     background-color: rgb(11, 11, 11);
     cursor: pointer;
 
@@ -139,7 +141,9 @@ body {
 }
 
 .body-deactivate-cover {
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -147,17 +151,11 @@ body {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
-
-  &.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
 
 .add-task-pop-up {
   position: relative;
-  top: -100%;
+  top: 0;
   width: min(80vw, calc($popup-basic-size * 2));
   height: min(80vh, $popup-basic-size);
   display: flex;
@@ -167,19 +165,16 @@ body {
   padding: $standard-padding;
   background-color: bisque;
   border-radius: $standard-padding;
-  opacity: 0;
+  opacity: 1;
   transition: all calc($animation-time * 2);
 
-  .task-description {
+  .new-task-description {
     flex-grow: 1;
   }
 
-  &.active {
-    top: 0;
-    opacity: 1;
-  }
-
-  .add-task-to-list {
+  &.showing {
+    top: -100%;
+    opacity: 0;
   }
 }
 
