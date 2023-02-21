@@ -1,20 +1,43 @@
+import { renderTask } from "./renderLogics.js";
+
 const tasks = localStorage.getItem('tasks')
-  ? localStorage.tasks
+  ? JSON.parse(localStorage.tasks)
   : [];
 
-function saveToLocalStorage(tasks){
+renderFromLocalStorage();
+
+function renderFromLocalStorage(){
+  tasks.forEach(taskData => {
+    renderTask(taskData);
+  });
+}
+
+function saveToLocalStorage(){
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function addTask(taskData){
   tasks.push(taskData);
-  saveToLocalStorage(tasks);
+  saveToLocalStorage();
 }
 
-function getElement(id){
-  const current = tasks.find(task => task.id === id);
-  return current;
+function deleteTaskData(id){
+  const taskDataIndex = getTaskDataIndex(id);
+  tasks.splice(taskDataIndex,1);
+  saveToLocalStorage();
 }
 
-export {addTask, tasks}
+function changeTaskData(modifiedTask){
+  const id = +modifiedTask.id;
+  let oldTaskIndex = getTaskDataIndex(id);
+  tasks[oldTaskIndex] = modifiedTask;
+  saveToLocalStorage();
+}
+
+function getTaskDataIndex(id){
+  const searchedIndex = tasks.findIndex(task => task.id == id);
+  return searchedIndex;
+}
+
+export {addTask, tasks, changeTaskData, deleteTaskData}
 

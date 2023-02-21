@@ -1,43 +1,65 @@
 import { TaskData } from "./task-create.js";
-import {addTask} from "./tasksList.js";
+import { addTask } from "./tasksList.js";
 import { renderTask } from "./renderLogics.js";
 
 function popUpLogic() {
-  const makeNewTaskBtn = document.getElementById('add-task-btn');
-  const popUpElement = makeNewTaskPopUp();
+  const showPopUpBtn = document.getElementById('add-task-btn');
+  showPopUpBtn.addEventListener('click', () => document.body.append(new PopUp().popUpElement));
+}
 
-  makeNewTaskBtn.addEventListener('click', () => showPopUp(popUpElement));
-  popUpElement.addEventListener('click', (e) => onPopUpClick(e));
+class PopUp {
+  constructor(changeTask) {
+    this.addTaskBtn = makeElementHTML({
+      elemOfKind: 'button',
+      classes: ['add-task-to-list'],
+      type: 'button',
+      textContent: changeTask ? 'Edit task' : 'Add new task',
+    });
+    this.taskName = makeElementHTML({
+      elemOfKind: 'input',
+      classes: ['new-task-name'],
+      type: 'text',
+      placeholder: 'Task name'
+    });
+    this.taskDescription = makeElementHTML({
+      elemOfKind: 'textarea',
+      classes: ['new-task-description'],
+      placeholder: 'Task description',
+    });
+    this.taskId = null;
+    this.taskDone = null;
+    this.popUpElement = this.makePopUpHTML();
+    this.popUpElement.addEventListener('click', (event) => this.removePopUp.call(this, event));
+    
 
-  function onPopUpClick(event) {
-    const btn = event.target.closest('.add-task-to-list');
-    const popUpContainer = event.target.closest('.body-deactivate-cover');
+    if(changeTask) this.setValues(changeTask);
 
-    if (btn) {
-      const popUpNameField = popUpContainer.querySelector('.new-task-name');
-      const popUpDescriptionField = popUpContainer.querySelector('.new-task-description');
-      const newTaskData = new TaskData({
-        taskName: popUpNameField.value,
-        taskDescription: popUpDescriptionField.value
-      });
-      
-      addTask(newTaskData);
-      
-      renderTask(newTaskData);
-
+    if (changeTask) {
+      this.addTaskBtn.addEventListener('click', () => this.makeChanges.call(this));
     } else {
-      const popUp = event.target.closest('.add-task-pop-up');
-      if (popUp) return;
+      this.addTaskBtn.addEventListener('click', () => this.makeNewTask.call(this));
     }
-
-    popUpContainer.remove();
   }
 
-  function showPopUp(elem) {
-    document.body.append(elem);
+  setValues(changeTask){
+    this.taskName.value = changeTask.taskName;
+    this.taskDescription.value = changeTask.taskDescription;
+    this.taskDone = changeTask.taskDone;
+    this.taskId = changeTask.taskId;
   }
 
-  function makeNewTaskPopUp() {
+  // makeChanges(){
+  //   const updatedTask = new TaskData({
+  //     taskName: this.taskName.value,
+  //     taskDescription: this.taskDescription.value,
+  //     taskId: this.taskId,
+  //     taskDone: this.taskDone
+  //   })
+
+  //   console.log(updatedTask);
+  // }
+
+  makePopUpHTML() {
     const popUpBodyCover = makeElementHTML({
       elemOfKind: 'div',
       classes: ['body-deactivate-cover']
@@ -46,28 +68,28 @@ function popUpLogic() {
       elemOfKind: 'div',
       classes: ['add-task-pop-up'],
     });
-    const taskName = makeElementHTML({
-      elemOfKind: 'input',
-      classes: ['new-task-name'],
-      type: 'text',
-      placeholder: 'Task name'
-    });
-    const taskDescription = makeElementHTML({
-      elemOfKind: 'textarea',
-      classes: ['new-task-description'],
-      placeholder: 'Task description',
-    });
-    const btn = makeElementHTML({
-      elemOfKind: 'button',
-      classes: ['add-task-to-list'],
-      type: 'button',
-      textContent: 'Add new task'
-    });
 
-    popUp.append(taskName, taskDescription, btn);
+    popUp.append(this.taskName, this.taskDescription, this.addTaskBtn);
     popUpBodyCover.append(popUp);
 
     return popUpBodyCover;
+  }
+
+  removePopUp(event) {
+    const clickedItemClasses = event.target.classList;
+    if (clickedItemClasses.contains('body-deactivate-cover')) {
+      this.popUpElement.remove();
+    }
+  }
+
+  makeNewTask() {
+    const newTask = new TaskData({
+      taskName: this.taskName.value,
+      taskDescription: this.taskDescription.value
+    });
+    addTask(newTask);
+    renderTask(newTask);
+    this.popUpElement.remove();
   }
 }
 
@@ -101,4 +123,4 @@ function makeElementHTML({
   return elem;
 }
 
-export {popUpLogic, makeElementHTML}
+export { popUpLogic, makeElementHTML, PopUp }
