@@ -1,1 +1,3 @@
-import { popUpLogic } from "./pop-up-create.js";
+import { initializeApp } from "./scripts/initializeApplication.js";
+
+initializeApp();

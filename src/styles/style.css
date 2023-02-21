@@ -69,16 +69,18 @@ body {
 
 .task-btn {
   box-sizing: border-box;
-  width: 1.5rem;
+  width: 2rem;
   border: 0.7rem solid transparent;
   border-top: none;
   border-bottom: none;
-  background-color: transparent;
   background-size: contain;
   background-position: center;
   background-origin: border-box;
   background-repeat: no-repeat;
   transition: background-image 0.2s;
+}
+.task-btn:hover {
+  cursor: pointer;
 }
 .task-btn.edit-task {
   background-image: url("../assets/imgs/pencil-min.svg");
