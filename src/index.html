@@ -35,6 +35,27 @@
 
   </footer>
 
+  <template id="task-item-template">
+    <li class="task-item">
+      <input type="checkbox" class="task-item-checkbox">
+      <div class="task-item-content">
+        <h3 class="task-item-content-name"></h3>
+        <div class="description"></div>
+      </div>
+      <div class="task-btn remove"></div>
+    </li>
+  </template>
+
+  <template id="pop-up-template">
+    <div class="body-deactivate-cover">
+      <div class="add-task-pop-up">
+        <input type="text" class="new-task-name" placeholder="Task name">
+        <textarea class="new-task-description" placeholder="Task description"></textarea>
+        <button type="button" class="add-task-to-list"></button>
+      </div>
+    </div>
+  </template>
+
   <script type="module" src="./index.js"></script>
 </body>
 
