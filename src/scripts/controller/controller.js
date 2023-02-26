@@ -39,7 +39,7 @@ function popUpLogic(taskContainer) {
   });
 }
 
-function onAddTask(newTask, container) {
-  taskList.addTask(newTask);
+function onAddTask(newTaskData, container) {
+  const newTask = taskList.addTask(newTaskData);
   renderTask(newTask, container);
 }

@@ -24,8 +24,6 @@ export class TaskHtml {
       this.checkbox.checked = true;
     }
 
-    console.log(this.task)
-
     this.checkbox.addEventListener('change', () => this.toggleDone());
     // this.pen.addEventListener('click', this.editTask)
     this.trashBin.addEventListener('click', () => this.deleteTaskHTML());
