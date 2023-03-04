@@ -1,8 +1,10 @@
-import { TaskData } from "./TaskData.js";
+import { ITaskDataConstructor, TaskData } from "./TaskData";
 
 const LOCAL_STORAGE_KEY_TASKS = 'LOCAL_STORAGE_KEY_TASKS';
 
 export class TaskList {
+  tasks: TaskData[]
+
   constructor() {
     const dataFromLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY_TASKS);
     this.tasks = dataFromLocalStorage
@@ -14,7 +16,7 @@ export class TaskList {
     localStorage.setItem(LOCAL_STORAGE_KEY_TASKS, JSON.stringify(this.tasks));
   }
 
-  addTask(taskData) {
+  addTask(taskData:Omit<ITaskDataConstructor, 'taskId'>) {
     const newTask = new TaskData({
       taskId: Date.now(),
       ...taskData
@@ -25,7 +27,7 @@ export class TaskList {
     return newTask;
   }
 
-  deleteTaskData(id) {
+  deleteTaskData(id: number) {
     const taskDataIndex = this.getTaskIndex(id);
     if (taskDataIndex === -1) {
       console.warn('No such task found');
@@ -35,7 +37,7 @@ export class TaskList {
     this.saveToLocalStorage();
   }
 
-  updateTaskData(modifiedTaskData) {
+  updateTaskData(modifiedTaskData: Partial<ITaskDataConstructor>) {
     const taskIndex = this.getTaskIndex(modifiedTaskData.taskId);
 
     if (taskIndex === -1) {
@@ -53,13 +55,15 @@ export class TaskList {
     this.tasks.splice(taskIndex, 1, newTaskData);
 
     this.saveToLocalStorage();
+
+    return newTaskData;
   }
 
-  getTaskById(id) {
-    return this.tasks.find(task => task.id === id);
+  getTaskById(id: number) {
+    return this.tasks.find(task => task.taskId === id);
   }
 
-  getTaskIndex(id) {
+  getTaskIndex(id: number) {
     return this.tasks.findIndex(t => t.taskId === id);
   }
 }

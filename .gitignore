@@ -4,3 +4,7 @@
 # конвертация стилей для scss
 src/styles/style.css.map
 src/styles/style.css
+
+# webpack
+node_modules
+dist
