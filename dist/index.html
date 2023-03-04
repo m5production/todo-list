@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo List by Dmitry Mikheev</title>
+<script defer src="main.f1992e544c2f72d390a3.js"></script></head>
+
+<body>
+
+  <header class="header">
+    <h1 class="main-header">Tasks Manager</h1>
+  </header>
+
+  <main class="main">
+    <div class="task-list-container">
+      <ul class="task-list" id="task-list">
+      </ul>
+    </div>
+    <div class="add-task btn" id="add-task-btn" tabindex="0" title="Add new task">
+      <svg class="add-task-svg" viewbox="0 0 100 100" width="40">
+        <rect class="vertical" width="10" height="100" x="45" y="0" rx="5"></rect>
+        <rect class="vertical" width="100" height="10" x="0" y="45" rx="5"></rect>
+      </svg>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="copyright">Proudly created by&ThickSpace;<a class="copyright-link"
+        href="https://m5production.github.io/myCV/">&copy;Dmitry Mikheev</a></div>
+
+  </footer>
+
+  <template id="task-item-template">
+    <li class="task-item">
+      <input type="checkbox" class="task-item-checkbox">
+      <div class="task-item-content">
+        <h3 class="task-item-content-name"></h3>
+        <div class="description"></div>
+      </div>
+      <div class="task-btn remove"></div>
+    </li>
+  </template>
+
+  <template id="pop-up-template">
+    <div class="body-deactivate-cover">
+      <div class="add-task-pop-up">
+        <input type="text" class="new-task-name" placeholder="Task name">
+        <textarea class="new-task-description" placeholder="Task description"></textarea>
+        <button type="button" class="add-task-to-list"></button>
+      </div>
+    </div>
+  </template>
+</body>
+
+</html>

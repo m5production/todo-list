@@ -1,5 +1,5 @@
 # Тестовое задание на курст по Angular
-- ссылка на деплй: https://m5production.github.io/hotels-ru-todo-list/src/
+- ссылка на деплй: https://m5production.github.io/todo-list/dist/
 
 ## Описание:
 

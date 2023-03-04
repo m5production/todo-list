@@ -7,4 +7,4 @@ src/styles/style.css
 
 # webpack
 node_modules
-dist
+# dist
