@@ -1,5 +1,5 @@
 # Тестовое задание на курст по Angular
-- ссылка на деплй: https://m5production.github.io/todo-list/dist/
+- ссылка на деплой: https://m5production.github.io/todo-list/dist/
 
 ## Описание:
 
