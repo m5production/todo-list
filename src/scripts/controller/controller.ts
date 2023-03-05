@@ -56,9 +56,9 @@ function onEditClick(taskContent: ITaskDataConstructor, taskNode: HTMLElement) {
   )
 }
 
-function onEditTask(newTask: ITaskDataConstructor, taskId: number, taskNode: HTMLElement){
-  newTask.taskId = taskId;
-  const updTaskData = taskList.updateTaskData(newTask);
-  const updTaskHtml = new TaskHtml({ onToggleDone, onDeleteTask, onEditClick, taskData: updTaskData })
-  taskNode.replaceWith(updTaskHtml.taskNode);
+function onEditTask(taskToUpdate: ITaskDataConstructor, taskId: number, taskNode: HTMLElement){
+  taskToUpdate.taskId = taskId;
+  const updTaskData = taskList.updateTaskData(taskToUpdate);
+  const updTaskHtml = new TaskHtml({ onToggleDone, onDeleteTask, onEditClick, taskData: updTaskData });
+  updTaskHtml.insertEditedTask(taskNode);
 }
