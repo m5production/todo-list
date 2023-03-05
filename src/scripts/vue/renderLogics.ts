@@ -71,4 +71,8 @@ export class TaskHtml {
     }
     this.onEditClick(taskContent, this.taskNode);
   }
+
+  insertEditedTask(oldNode: HTMLElement){
+    oldNode.replaceWith(this.taskNode);
+  }
 }
